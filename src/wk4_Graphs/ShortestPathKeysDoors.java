@@ -1,6 +1,7 @@
 package wk4_Graphs;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ShortestPathKeysDoors {
 
@@ -12,13 +13,34 @@ public class ShortestPathKeysDoors {
 @#+.
 * */
 
+
+
         int rows = 3;
         String[] grid = new String[]{"...B", ".b#.", "@#+."};
 
         int[][] result = find_shortest_path(grid);
+        Queue foo = new LinkedList<>();
+        Map ugh = new HashMap();
+        ugh.put(1, true);
+
+        if(ugh.get(1).equals(true)){
+            System.out.println((char)27 + "[97;43m"+ result.length +(char)27+"[0m");
+        }
+        Arrays.stream(result).filter(a -> {
+         return Arrays.stream(a).anyMatch(b -> b == 1);
+        })
+                .flatMapToInt(Arrays::stream)
+                .distinct()
+                .forEach(num->foo.add(num));
+
+        Map graph = new HashMap();
+//        graph.computeIfAbsent(a, val -> new ArrayList<Integer>()).add(b);
+//        graph.computeIfAbsent(b, val -> new ArrayList<Integer>()).add(a);
+System.out.println((char)27 + "[97;43m"+ Arrays.toString(foo.toArray()) +(char)27+"[0m");
+
 
         for (int i = 0; i < result.length; i++) {
-            System.out.println((char) 27 + "[97;43m" + Arrays.toString(result[i]) + (char) 27 + "[0m");
+//            System.out.println((char) 27 + "[97;43m" + Arrays.toString(result[i]) + (char) 27 + "[0m");
         }
     }
 
